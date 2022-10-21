@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="category">
+        <div class="container">
+            <div class="main-title">الأصناف</div>
+            <form method="POST">
+                {% csrf_token %}
+                <input required name="title" type="text">
+                <input type="submit" name="add" value="إضافة">
+            </form>
+
+            <table class="main-table">
+                <thead>
+                    <tr>
+                        <th>الصنف</th>
+                        <th>الحذف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category in categories %}
+                        <tr>
+                            <td>{{category.title}}</td>
+                            <td><button class="remove" page-del="{% url 'delete_category' category.id %}" text="{{category.title}}">حذف</button></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="delete-popup">
+            <div class="content">
+                <div>هل أنت متأكد من أنك تريد حذف <span class="item-name"></span></div>
+                <span class="close">x</span>
+                <div class="buttons">
+                    <a class="popup-btn delete" href="">حذف</a>
+                    {% comment %}
+                    <input class="popup-btn delete" type="submit" value="حذف">
+                      
+                    <a class="popup-btn cancel">إلغاء</a>
+                    {% endcomment %}
+                    <input class="popup-btn cancel" type="submit" value="إلغاء">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/popup.js' %}"></script>
+{% endblock content %}
+    

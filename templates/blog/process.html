@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+
+<div class="process">
+  <div class="main-title">العملية</div>
+<div class="container">
+  <form method="POST">
+    {% csrf_token %}
+    <select required id="category" name="categories">
+        <option value="">--------</option>
+        {% for category in categories %}
+            <option category="{{category.id}}" value="{{category}}">{{category}}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <select required id="items" name="items">
+        <option value="">--------</option>
+        {% for item in items %}
+            <option category="{{item.category.id}}" count="{{item.count}}" value="{{item.id}}">{{item.name}}</option>
+        {% endfor %}
+    </select>
+    <p class="count"></p>
+    <input required placeholder="اكتب العدد هنا" type="number" name="count">
+    <br>
+    <div class="buttons">
+      <input class="add" name="add" type="submit" value="إضافة">
+      <input class="remove" name="remove" type="submit" value="حذف">
+    </div>
+    <div class="error"></div>
+  </form>
+</div></div>
+<script src="{% static 'js/process.js' %}"></script>
+{% endblock content %}
+  

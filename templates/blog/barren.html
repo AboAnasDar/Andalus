@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+{% block content %}
+  <div class="barren">
+    <div class="container">
+      <div class="main-title">السجل</div>
+      <table class="main-table">
+        <thead>
+          <tr>
+            <th>الصنف</th>
+            <th>العنصر</th>
+            <th>العدد</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+            <tr>
+              <td>{{item.category.title}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.count}}</td>
+            </tr>    
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock content %}
+  

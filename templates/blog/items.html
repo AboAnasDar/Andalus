@@ -1,0 +1,88 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+    {% comment %}
+    <form method="POST">
+        {% csrf_token %}
+        <select name="categories" id="">
+            <option value="">--------</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{category.title}}</option>
+            {% endfor %}
+        </select>
+        <input name="name" type="text">
+        <input type="number" name="count">
+
+        <input type="submit" name="add" value="إضافة">
+    </form>
+
+    {% for item in items %}
+        {{item.category}}
+        {{item.name}}
+        {{item.count}}
+        <a href="{% url 'delete_item' item.id %}">delete</a>
+        <br>
+    {% endfor %}
+{% endcomment %}
+    <div class="items">
+        <div class="container">
+            <div class="main-title">العناصر</div>
+            {% comment %}
+            <form method="POST">
+                {% csrf_token %}
+                <input name="title" type="text">
+                <input type="submit" name="add" value="إضافة">
+            </form>
+            {% endcomment %}
+
+            <form method="POST">
+                {% csrf_token %}
+                <select required name="categories" class="filed">
+                    <option value="">--------</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{category.title}}</option>
+                    {% endfor %}
+                </select>
+                <input required name="name" type="text" class="filed">
+                <input required type="number" name="count" class="filed">
+        
+                <input type="submit" name="add" value="إضافة">
+            </form>
+
+            <table class="main-table">
+                <thead>
+                    <tr>
+                        <th>الصنف</th>
+                        <th>العنصر</th>
+                        <th>العدد</th>
+                        <th>الحذف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td>{{item.category}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.count}}</td>
+                            <td><button class="remove" page-del="{% url 'delete_item' item.id %}" text="{{item.name}}">حذف</button></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="delete-popup">
+            <div class="content">
+                <div>هل أنت متأكد من أنك تريد حذف <span class="item-name"></span></div>
+                <span class="close">x</span>
+                <div class="buttons">
+                    <a class="popup-btn delete" href="">حذف</a>
+                    <input class="popup-btn cancel" type="submit" value="إلغاء">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/popup.js' %}"></script>
+{% endblock content %}

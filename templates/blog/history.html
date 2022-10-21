@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="history">
+    <div class="container">
+        <div class="main-title">السجل</div>
+        <table class="main-table">
+            <thead>
+                <tr>
+                    <th>الصنف</th>
+                    <th>العنصر</th>
+                    <th>التاريخ</th>
+                    <th>العدد</th>
+                    <th>العملية</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for history in histories %}
+                <tr>
+                    <td>{{history.item.category}}</td>
+                    <td>{{history.item.name}}</td>
+                    <td>{{history.date}}</td>
+                    <td>{{history.number}}</td>
+                    <td>{{history.process}}</td>
+                </tr>    
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="{% static 'js/main-table.js' %}"></script>
+
+{% endblock content %}
+    
